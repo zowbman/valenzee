@@ -1,0 +1,21 @@
+$(function(){
+    //排班添加申请
+    $('.schedule-add-apply-btn').click(function(){
+        alert("添加成功");
+    });
+    //移除排班
+    $('.schedule-remove-btn').click(function(){
+        alert("移除排班成功");
+        $(this).parent().parent().find("td:eq(1)").text("未选择");
+        $(this).parent().parent().find("td:eq(2)").text("未选择");
+        $(this).prev().text("添加");
+        $(this).remove();
+    });
+    //主播白名单添加
+    $('#form-white-list').submit(function(e){
+        e.preventDefault();
+        if(formSign()){
+            alert('添加成功');
+        }
+    });
+});
