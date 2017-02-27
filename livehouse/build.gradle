@@ -24,3 +24,7 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.4'
     testCompile 'junit:junit:4.12'
 }
+
+jar.exclude 'logback-test.xml'
+jar.exclude '*.properties'
+jar.exclude '*.tpl'
