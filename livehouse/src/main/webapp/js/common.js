@@ -1,15 +1,11 @@
-function formSign(){
+function formFieldError(errors){
+    var errorString = '';
     $('.form-sigin').find('.hint').attr('style','display:none');
-    var ySubmit = true;
-    $.each($('.form-sigin').find('input'),function(i,item){
-        if(!ySubmit){
-            return;
-        }
-        if(null == $(item).val() || '' == $(item).val()){
-            $('.form-sigin').find('.hint-'+ $(item).attr('name') +'').attr('style','display:block;');
-            $(item).focus();
-            ySubmit = false;
-        }
+    $.each(errors,function(i,item){
+        errorString += item.message;
+        $('.form-sigin').find('.hint').text('*'+errorString);
+        $('.form-sigin').find('.hint').attr('style','display:block;');
+        $(item.element).focus();
+        return false;
     });
-    return ySubmit;
 }

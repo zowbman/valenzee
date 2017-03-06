@@ -22,7 +22,30 @@ dependencies {
     compile 'org.aspectj:aspectjweaver:1.8.9'
     compile 'commons-codec:commons-codec:1.10'
     compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1'
+    compile 'c3p0:c3p0:0.9.1.2'
+    compile 'mysql:mysql-connector-java:5.1.6'
+    compile 'com.google.guava:guava:19.0'
     testCompile 'junit:junit:4.12'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+task copyLib1(type: Sync, dependsOn: jar) {
+    from configurations.compile
+    from jar.archivePath
+    into 'build/deploy'
+}
+
+task copyLib2(type: Sync, dependsOn: copyLib1) {
+    from 'src/main/webapp'
+    into 'build/deploy/webapp'
+}
+
+task deploy{
+    dependsOn  'copyLib2'
 }
 
 jar.exclude 'logback-test.xml'

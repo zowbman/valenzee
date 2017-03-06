@@ -3,6 +3,7 @@ package cn.ac.bigo;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,6 +18,7 @@ import org.springframework.context.annotation.Bean;
  * Created by zwb on 2017/2/23.
  */
 @SpringBootApplication
+@MapperScan("cn.ac.bigo.**.mapper")
 public class MainServer extends SpringBootServletInitializer {
 
     @Value("${custom.resource-base}")

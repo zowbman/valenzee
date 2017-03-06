@@ -8,9 +8,16 @@
     transition: all 300ms ease-out;
 }
 
-.form-sigin .hint{
-	display:none;
+.error{
 	color:#fc4343;
 	margin-bottom: 5px;
     font-size: 12px;
+}
+
+.form-sigin span.hint{
+	display:block;
+	color:#fc4343;
+	margin-bottom: 5px;
+    font-size: 12px;
+    font-weight:700;
 }
