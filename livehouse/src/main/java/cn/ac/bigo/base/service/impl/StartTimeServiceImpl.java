@@ -20,4 +20,9 @@ public class StartTimeServiceImpl implements IStartTimeService {
     public List<StartTimePo> findAll() {
         return startTimeMapper.findAll();
     }
+
+    @Override
+    public String getStartTimeById(int id) {
+        return startTimeMapper.getStartTimeById(id);
+    }
 }

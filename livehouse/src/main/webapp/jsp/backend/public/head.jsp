@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
   <head>
     <title>Live House|排班|后台管理</title>
@@ -11,9 +12,12 @@
 	<link rel="stylesheet" type="text/css" href="/css/common.css">
 	<link rel="stylesheet" type="text/css" href="/css/backend.css">
 	<link rel="stylesheet" type="text/css" href="/bootstrap3/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/bootstrap3/css/bootstrap-datetimepicker.min.css">
+	<link rel="stylesheet" type="text/css" href="/bootstrap3/css/bootstrap-select.min.css">
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/jquery.validate.min.js"></script>
     <script src="/bootstrap3/js/bootstrap.min.js"></script>
+    <script src="/bootstrap3/js/bootstrap-datetimepicker.min.js"></script>
     <script src="/js/common.js"></script>
     <script src="/js/backend.js"></script>
   </head>
@@ -31,8 +35,8 @@
       </div>
       <div id="navbar" class="collapse navbar-collapse" role="navigation">
         <ul id="mytab" class="nav navbar-nav">
-          <li class="active"><a href="javascript:;">排班管理</a></li>
-          <li><a href="javascript:;">白名单管理</a></li>
+          <li <c:if test="${active==0}">class="active"</c:if>><a href="/schedule">排班管理</a></li>
+          <li <c:if test="${active==1}">class="active"</c:if>><a href="/whiteList">白名单管理</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>

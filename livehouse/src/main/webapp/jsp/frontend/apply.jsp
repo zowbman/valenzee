@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="duration" class="col-sm-3 control-label">Time</label>
+                <label for="duration" class="col-sm-3 control-label">Duration</label>
                 <div class="col-sm-6">
                      <label class="radio-inline">
                        <input type="radio" name="duration" id="duration" value="1" checked="true"> 0.5 hour

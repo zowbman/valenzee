@@ -2,6 +2,7 @@ package cn.ac.bigo.base.mapper;
 
 import cn.ac.bigo.base.model.po.StartTimePo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -12,6 +13,9 @@ import java.util.List;
 @Mapper
 public interface StartTimeMapper {
 
-    @Select("SELECT * FROM t_startTime")
+    @Select("SELECT id,startTime FROM t_startTime")
     List<StartTimePo> findAll();
+
+    @Select("SELECT startTime FROM t_startTime WHERE id = #{id}")
+    String getStartTimeById(@Param("id") int id);
 }

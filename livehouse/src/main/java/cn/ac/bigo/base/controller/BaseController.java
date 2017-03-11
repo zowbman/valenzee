@@ -1,5 +1,6 @@
 package cn.ac.bigo.base.controller;
 
+import cn.ac.bigo.backend.service.IScheduleService;
 import cn.ac.bigo.backend.service.IWhiteListService;
 import cn.ac.bigo.base.service.IStartTimeService;
 import cn.ac.bigo.frontend.service.IApplyService;
@@ -19,4 +20,7 @@ public class BaseController {
 
     @Autowired
     protected IWhiteListService iWhiteListService;
+
+    @Autowired
+    protected IScheduleService iScheduleService;
 }

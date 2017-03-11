@@ -3,8 +3,7 @@
 <div class="container" style="padding-bottom: 60px;">
   <h1 class="page-header">主播白名单</h1>
   <form id="form-white-list" class="form-inline form-sigin">
-    <div class="error">
-    </div>
+    <div class="error"></div>
     <div class="form-group">
       <label for="bigoID">Bigo ID</label>
       <input type="text" class="form-control" id="bigoID" name="bigoID" placeholder="">

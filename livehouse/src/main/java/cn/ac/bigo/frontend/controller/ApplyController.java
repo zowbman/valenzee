@@ -22,8 +22,8 @@ public class ApplyController extends BaseController {
 
     @PostMapping("/v1/applySubmit")
     @ResponseBody
-    public PubReturnMsg applySubmit(ApplyVo applyVo){
-        log.info(applyVo.toString());
+    public PubReturnMsg applySubmit(ApplyVo applyVo) {
+        log.info("param applyVo:[{}]", applyVo.toString());
         boolean result = iApplyService.apply(applyVo);
         return new PubReturnMsg(CodeHelper.SUCCESS);
     }

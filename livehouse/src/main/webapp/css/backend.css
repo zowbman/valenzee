@@ -112,3 +112,18 @@ body {
   border-radius: 50%;
 }
 
+.manual-input-schedule-btn{
+	display: block;
+	width:100%;
+	/* padding: 10px 16px; */
+	height:34px;
+	font-size: 14px;
+    line-height: 1.33;
+    border-radius: 6px;
+    color: gray;
+    background-color: white;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    position: relative;
+}
+

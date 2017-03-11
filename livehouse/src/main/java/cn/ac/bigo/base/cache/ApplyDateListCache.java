@@ -1,4 +1,4 @@
-package cn.ac.bigo.base;
+package cn.ac.bigo.base.cache;
 
 import cn.ac.bigo.base.util.ConcurrentDateUtil;
 import com.google.common.cache.CacheBuilder;

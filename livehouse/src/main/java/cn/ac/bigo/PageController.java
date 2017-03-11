@@ -1,6 +1,7 @@
 package cn.ac.bigo;
 
-import cn.ac.bigo.base.ApplyDateListCache;
+import cn.ac.bigo.base.cache.ApplyDateListCache;
+import cn.ac.bigo.base.util.ConcurrentDateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,11 +25,6 @@ public class PageController {
     public String apply(Model model) {
         model.addAttribute("applyDateList", applyDateListCache.getApplyDateList());
         return "frontend/apply";
-    }
-
-    public static void main(String[] args) {
-
-
     }
 
     /**
@@ -57,7 +53,10 @@ public class PageController {
      * @return
      */
     @GetMapping("/schedule")
-    public String schedule() {
+    public String schedule(Model model) {
+        model.addAttribute("date", applyDateListCache.getApplyDateList());
+        model.addAttribute("active", 0);
+        model.addAttribute("currentDate", ConcurrentDateUtil.format(System.currentTimeMillis()));
         return "backend/schedule";
     }
 
@@ -67,7 +66,8 @@ public class PageController {
      * @return
      */
     @GetMapping("/whiteList")
-    public String whiteList() {
+    public String whiteList(Model model) {
+        model.addAttribute("active", 1);
         return "backend/white_list";
     }
 }
