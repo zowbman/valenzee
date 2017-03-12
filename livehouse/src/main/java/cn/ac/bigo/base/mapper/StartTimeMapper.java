@@ -18,4 +18,7 @@ public interface StartTimeMapper {
 
     @Select("SELECT startTime FROM t_startTime WHERE id = #{id}")
     String getStartTimeById(@Param("id") int id);
+
+    @Select("SELECT startTime FROM t_startTime")
+    List<String> getStartTime();
 }

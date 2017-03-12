@@ -44,7 +44,7 @@
             <div class="form-group">
                 <label for="timeSlot" class="col-sm-3 control-label">Time Slot</label>
                 <div class="col-sm-6">
-                    <select class="selectpicker" name="applyDate">
+                    <select class="selectpicker" id ="applyDate" name="applyDate">
                         <c:forEach var="item" items="${applyDateList}">
                             <option>${item}</option>
                         </c:forEach>
@@ -102,5 +102,6 @@
             $("#form-apply").validate();
 	    });
     </script>
+    <%@ include file="/jsp/public/login.jspf" %>
   </body>
 </html>

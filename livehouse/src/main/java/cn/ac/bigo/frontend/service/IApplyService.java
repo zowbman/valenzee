@@ -2,6 +2,7 @@ package cn.ac.bigo.frontend.service;
 
 import cn.ac.bigo.backend.model.po.ApplyListByDatePo;
 import cn.ac.bigo.backend.model.po.ApplyPo;
+import cn.ac.bigo.frontend.model.po.ApplyQueryPo;
 import cn.ac.bigo.frontend.model.vo.ApplyVo;
 
 import java.util.Date;
@@ -21,6 +22,7 @@ public interface IApplyService {
 
     /**
      * 根据日期获取申请排班列表
+     *
      * @param applyDate
      * @param startTime
      * @return
@@ -43,4 +45,19 @@ public interface IApplyService {
      * @return
      */
     ApplyPo getPeddingApplyById(int id);
+
+    /**
+     * 申请查询
+     *
+     * @param bigoID
+     * @return
+     */
+    List<ApplyQueryPo> getApplyQuery(long bigoID);
+
+    /**
+     * 是否已经申请此时间段
+     * @param applyVo
+     * @return
+     */
+    int isAlreadyApply(ApplyVo applyVo);
 }

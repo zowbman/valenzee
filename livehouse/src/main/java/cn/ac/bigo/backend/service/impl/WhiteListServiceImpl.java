@@ -28,4 +28,12 @@ public class WhiteListServiceImpl implements IWhiteListService {
     public boolean addWhiteList(WhiteListVo whiteListVo) {
         return whiteListMapper.add(whiteListVo.getBigoID(), whiteListVo.getFraction(), BaseUtil.currentTimeMillis());
     }
+
+    @Override
+    public int isExist(long bigoID) {
+        if (bigoID <= 0) {
+            return 0;
+        }
+        return whiteListMapper.isExist(bigoID);
+    }
 }

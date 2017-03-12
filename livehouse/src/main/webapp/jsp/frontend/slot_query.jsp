@@ -3,7 +3,7 @@
 <div class="container">
     <h1 class="page-header">SLOT QUERY</h1>
     <form id="form-slot-query" class="form-inline form-sigin">
-        <span class="hint hint-bigoID">*Please Enter Bigo ID</span>
+        <div class="error"></div>
         <div class="form-group">
           <label for="bigoID">Bigo ID</label>
           <input type="text" class="form-control" id="bigoID" name="bigoID" placeholder="">
@@ -19,28 +19,7 @@
               <th>结果</th>
             </tr>
           </thead>
-          <tbody id="solt-query-list">
-            <tr>
-                <td>00:00-00:30</td>
-                <td>123456</td>
-                <td>成功</td>
-            </tr>
-            <tr>
-                <td>00:00-00:30</td>
-                <td>123456</td>
-                <td>失败</td>
-            </tr>
-            <tr>
-                <td>00:00-00:30</td>
-                <td>123456</td>
-                <td>成功</td>
-            </tr>
-            <tr>
-                <td>00:00-00:30</td>
-                <td>123456</td>
-                <td>失败</td>
-            </tr>
-          </tbody>
+          <tbody id="solt-query-list"></tbody>
         </table>
     </div>
 </div>

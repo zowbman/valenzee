@@ -4,6 +4,7 @@ import cn.ac.bigo.backend.model.po.ApplyListByDatePo;
 import cn.ac.bigo.backend.model.po.ApplyPo;
 import cn.ac.bigo.base.util.BaseUtil;
 import cn.ac.bigo.frontend.mapper.ApplyMapper;
+import cn.ac.bigo.frontend.model.po.ApplyQueryPo;
 import cn.ac.bigo.frontend.model.vo.ApplyVo;
 import cn.ac.bigo.frontend.service.IApplyService;
 import org.slf4j.Logger;
@@ -54,5 +55,19 @@ public class ApplyServiceImpl implements IApplyService {
             return null;
         }
         return applyMapper.getByIdAndIsPass(id, 0);
+    }
+
+    @Override
+    public List<ApplyQueryPo> getApplyQuery(long bigoID) {
+        if (bigoID <= 0) {
+            log.error("getApplyQuery service param bigoID:[{}] is error", bigoID);
+            return new ArrayList<>();
+        }
+        return applyMapper.getApplyQueryByBigoID(bigoID);
+    }
+
+    @Override
+    public int isAlreadyApply(ApplyVo applyVo) {
+        return applyMapper.isAlreadyApply(applyVo.getBigoID(), applyVo.getApplyDate(), applyVo.getStartTime(), applyVo.getDuration());
     }
 }

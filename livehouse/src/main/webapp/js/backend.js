@@ -41,32 +41,36 @@ $(function(){
                 date:date
             },
             success: function(data){
-                var _html='';
-                $.each(data.data,function(i,item){
-                    if(item.scheduled){
-                        _html+='<tr class="row_'+item.scheduleId+' success">';
-                    }else{
-                        _html+='<tr class="row_'+item.scheduleId+'">';
-                    }
-                    _html+='<td>'+item.startTime+'</td>';
-                    _html+='<td>'+item.duration+'</td>';
-                    _html+='<td>'+item.bigoID+'</td>';
-                    _html+='<td>'+item.whatsAppNumber+'</td>';
-                    _html+='<td>';
-                    _html+='<input type="hidden" name="startTimeId" value="'+item.id+'">'
-                    if(!item.scheduled){
-                        _html+='<a class="btn btn-default btn-xs schedule-add-btn" href="javascript:;"  role="button">添加</a> ';
-                    }else{
-                        _html+='<input type="hidden" name="scheduleId" value="'+item.scheduleId+'">'
-                        _html+='<a class="btn btn-default btn-xs schedule-edit-btn" href="javascript:;"  role="button">修改</a> ';
-                        _html+='<a class="btn btn-default btn-xs schedule-remove-btn" href="javascript:;" role="button">移除</a> ';
-                    }
-                    _html+='<a class="btn btn-default btn-xs manual-input-btn" href="javascript:;"  role="button">手动输入</a> ';
-                    _html+='</td>';
-                    _html+='</tr>';
-                });
-                $('#schedule-info').html(_html);
-                tableRowSpan('schedule-info');
+                if(data.code==0){
+                    var _html='';
+                    $.each(data.data,function(i,item){
+                        if(item.scheduled){
+                            _html+='<tr class="row_'+item.scheduleId+' success">';
+                        }else{
+                            _html+='<tr class="row_'+item.scheduleId+'">';
+                        }
+                        _html+='<td>'+item.startTime+'</td>';
+                        _html+='<td>'+item.duration+'</td>';
+                        _html+='<td>'+item.bigoID+'</td>';
+                        _html+='<td>'+item.whatsAppNumber+'</td>';
+                        _html+='<td>';
+                        _html+='<input type="hidden" name="startTimeId" value="'+item.id+'">'
+                        if(!item.scheduled){
+                            _html+='<a class="btn btn-default btn-xs schedule-add-btn" href="javascript:;"  role="button">添加</a> ';
+                        }else{
+                            _html+='<input type="hidden" name="scheduleId" value="'+item.scheduleId+'">'
+                            _html+='<a class="btn btn-default btn-xs schedule-edit-btn" href="javascript:;"  role="button">修改</a> ';
+                            _html+='<a class="btn btn-default btn-xs schedule-remove-btn" href="javascript:;" role="button">移除</a> ';
+                        }
+                        _html+='<a class="btn btn-default btn-xs manual-input-btn" href="javascript:;"  role="button">手动输入</a> ';
+                        _html+='</td>';
+                        _html+='</tr>';
+                    });
+                    $('#schedule-info').html(_html);
+                    tableRowSpan('schedule-info');
+                }else{
+                    alert(data.msg);
+                }
             },
             error: function() {
                 alert('请求数据失败');
@@ -251,11 +255,12 @@ $(function(){
             type: 'GET',
             url: '/backend/json/v1/getWhiteList',
             success: function(data){
+                console.log(data);
                 if(data.code == 0){
                     var _html='';
                     $.each(data.data,function(i,item){
                         _html+='<tr>'
-                        _html+='<td>'+item.addTime+'</td>';
+                        _html+='<td>'+item.addTimeStr+'</td>';
                         _html+='<td>'+item.bigoID+'</td>';
                         _html+='<td>'+item.fraction+'</td>';
                         _html+='</tr>'
@@ -300,17 +305,25 @@ $(function(){
         rules:{
             bigoID:{
                 required: true,
+                digits:true,
+                maxlength:15
             },
             fraction:{
                 required: true,
+                digits:true,
+                max:100
             }
         },
         messages:{
             bigoID:{
-                required:'*Please Enter Bigo ID'
+                required:'*Please Enter Bigo ID',
+                digits:'*Please enter a valid Bigo ID ',
+                maxlength:'*Please enter a length less than 15 characters'
             },
             fraction:{
-                required:'*Please Enter Fraction'
+                required:'*Please Enter Fraction',
+                digits:'*Please Enter digits',
+                max:'*Please enter the number within 100'
             }
         }
     });

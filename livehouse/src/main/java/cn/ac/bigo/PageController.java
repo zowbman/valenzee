@@ -43,7 +43,8 @@ public class PageController {
      * @return
      */
     @GetMapping("/todaySchedule")
-    public String todaySchedule() {
+    public String todaySchedule(Model model) {
+        model.addAttribute("today", ConcurrentDateUtil.format(System.currentTimeMillis()));
         return "frontend/today_schedule";
     }
 

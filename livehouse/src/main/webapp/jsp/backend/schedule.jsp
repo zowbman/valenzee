@@ -119,9 +119,9 @@
     	format: 'yyyy-mm-dd'
     });
     function tableRowSpan(tbodyId){
-        firsttr='';
-        currenttr='';
-        spanNum=0;
+        var firsttr='';
+        var currenttr='';
+        var spanNum=0;
         var tr = $('#'+tbodyId+' tr');
         $(tr).each(function(i){
             if(i==0){
@@ -130,7 +130,7 @@
                 currenttr=$(this);
                 if(firsttr.attr('class') != 'row_-1' && firsttr.attr('class') == currenttr.attr('class')){
                     spanNum++;
-                    newText ='';
+                    var newText ='';
                     newText += firsttr.find('td:eq(0)').text().split('~')[0];
                     newText += '~'
                     newText += currenttr.find('td:eq(0)').text().split('~')[1];

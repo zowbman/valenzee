@@ -19,4 +19,7 @@ public interface WhiteListMapper {
 
     @Insert("insert ignore into t_whitelist (bigoID, fraction, addTime) values(#{bigoID}, #{fraction}, #{addTime})")
     boolean add(@Param("bigoID") long bigoID, @Param("fraction") int fraction, @Param("addTime") int addTime);
+
+    @Select("select count(1) from t_whitelist where bigoID=#{bigoID}")
+    int isExist(@Param("bigoID") long bigoID);
 }

@@ -58,7 +58,7 @@ public class ScheduleServiceImpl implements IScheduleService {
     public boolean passAplly(SaveSchedulePo saveSchedulePo) {
         boolean isResult = true;
         if (saveSchedulePo.getApplyId() > 0) {
-            isResult = applyMapper.updateIsPassById(saveSchedulePo.getApplyId(), 1);//(1:通过)
+            isResult = applyMapper.updateIsPassById(saveSchedulePo.getApplyId(), 2);//(2:成功)
         }
         if (!isResult) {
             log.error("passAplly 更新排班申请信息状态 error,param applyId:[{}]", saveSchedulePo.getApplyId());

@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/frontend.css">
 	<link rel="stylesheet" type="text/css" href="/bootstrap3/css/bootstrap.min.css">
 	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery.validate.min.js"></script>
 	<script src="/js/common.js"></script>
 	<script src="/js/frontend.js"></script>
   </head>

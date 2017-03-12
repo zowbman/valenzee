@@ -2,6 +2,7 @@ package cn.ac.bigo.frontend.mapper;
 
 import cn.ac.bigo.backend.model.po.ApplyListByDatePo;
 import cn.ac.bigo.backend.model.po.ApplyPo;
+import cn.ac.bigo.frontend.model.po.ApplyQueryPo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -30,4 +31,10 @@ public interface ApplyMapper {
 
     @Update("update t_apply set isPass=#{isPass} where id=#{id}")
     boolean updateIsPassById(@Param("id") int id, @Param("isPass") int isPass);
+
+    @Select("select applyDate,startTime,duration,isPass,addTime from t_apply where bigoID=#{bigoID}")
+    List<ApplyQueryPo> getApplyQueryByBigoID(@Param("bigoID") long bigoID);
+
+    @Select("select count(1) from t_apply where bigoID=#{bigoID} and applyDate=#{applyDate} and startTime=#{startTime} and duration=#{duration}")
+    int isAlreadyApply(@Param("bigoID") long bigoID, @Param("applyDate") Date applyDate, @Param("startTime") int startTime, @Param("duration") int duration);
 }

@@ -24,4 +24,9 @@ public interface IStartTimeService {
      * @return
      */
     String getStartTimeById(int id);
+
+    /**
+     * @return
+     */
+    List<String> getStartTime();
 }

@@ -36,6 +36,14 @@ public class PubReturnMsg {
         this.data = data;
     }
 
+    public PubReturnMsg(int code, String appendMsg, Object data){
+        this.code = code;
+        this.msg = CustomPropertyPlaceholderConfigurer.getStringValue(String.valueOf(code));
+        this.msg += "," + appendMsg;
+        this.time = BaseUtil.currentTimeMillis();
+        this.data = data;
+    }
+
     public int getCode() {
         return code;
     }
