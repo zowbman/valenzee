@@ -1,6 +1,10 @@
 package cn.ac.bigo.backend.interceptor;
 
 import cn.ac.bigo.backend.common.CurrentLoginStatus;
+import cn.ac.bigo.base.helper.CodeHelper;
+import cn.ac.bigo.base.model.po.PubReturnMsg;
+import cn.ac.bigo.base.util.JacksonMapper;
+import cn.ac.bigo.base.util.WebUtil;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,9 +18,13 @@ public class CheckPrivilegeInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         boolean status = CurrentLoginStatus.get(request, response);//获取当前登陆状态
-        System.out.println(status);
-        if(!status){
-            response.sendRedirect("/jsp/noPrivilege.jsp");
+        if (!status) {
+            if (WebUtil.isAjaxRequest(request)) {//ajax
+                response.setContentType("application/json;charset=UTF-8");
+                response.getOutputStream().print(JacksonMapper.getJsonString(new PubReturnMsg(CodeHelper.AJAXNOPRIVILEGE)));
+            } else {
+                response.sendRedirect("/jsp/noPrivilege.jsp");
+            }
         }
         return status;
     }

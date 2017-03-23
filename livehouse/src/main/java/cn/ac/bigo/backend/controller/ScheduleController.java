@@ -113,7 +113,13 @@ public class ScheduleController extends BaseController {
             applyListByDatePoShow.setApplyDate(sb.toString());//申请时间
             applyListByDatePoShow.setDuration(applyListByDatePo.getDuration() / 2f);//时长
             //备注信息处理，如timeSlot时间段的endTime已经排班则提示
-            String timeSlot = String.valueOf(applyListByDatePo.getDuration() == 1 ? startTimeId : startTimeId + 1);
+            int endTimeId = applyListByDatePo.getDuration() == 1 ? startTimeId : startTimeId + 1;
+            String timeSlot;
+            if (endTimeId > 48) {
+                timeSlot = String.valueOf(1);
+            } else {
+                timeSlot = String.valueOf(endTimeId);
+            }
             scheduledTimeSlot.stream().filter((s) -> s.indexOf(timeSlot) != -1 || s.indexOf(String.valueOf(startTimeId)) != -1).forEach((s) -> {
                 applyListByDatePoShow.setRemarks("申请时间段已被排班");
                 applyListByDatePoShow.setScheduled(true);
@@ -159,7 +165,13 @@ public class ScheduleController extends BaseController {
             applyListByDatePoShow.setDuration(applyListByDatePo.getDuration() / 2f);//时长
             applyListByDatePoShow.setOldScheduleId(scheduleId);//旧排班id
             //备注信息处理，如timeSlot时间段的endTime已经排班则提示
-            String timeSlot = String.valueOf(applyListByDatePo.getDuration() == 1 ? startTimeId : startTimeId + 1);
+            int endTimeId = applyListByDatePo.getDuration() == 1 ? startTimeId : startTimeId + 1;
+            String timeSlot;
+            if (endTimeId > 48) {
+                timeSlot = String.valueOf(1);
+            } else {
+                timeSlot = String.valueOf(endTimeId);
+            }
             scheduledTimeSlot.stream().filter((s) -> s.indexOf(timeSlot) != -1 || s.indexOf(String.valueOf(startTimeId)) != -1).forEach((s) -> {
                 applyListByDatePoShow.setRemarks("申请时间段已被排班");
                 applyListByDatePoShow.setScheduled(true);

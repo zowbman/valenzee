@@ -11,4 +11,5 @@ public class CodeHelper {
     public static final int WHITELISTNOTEXIST = 1003;
     public static final int ALREADYAPPLY = 1004;
     public static final int PWDERROR = 1005;
+    public static final int AJAXNOPRIVILEGE = 1006;
 }
