@@ -123,6 +123,7 @@
         var currenttr='';
         var spanNum=0;
         var tr = $('#'+tbodyId+' tr');
+        var len = tr.length;
         $(tr).each(function(i){
             if(i==0){
                 firsttr=$(this);
@@ -142,6 +143,17 @@
                 }
             }
         });
+        //检测第一个和最后一个是否同一申请，如果是则合并
+        firsttr = $(tr).first();
+        currenttr = $(tr).last();
+        if(firsttr.attr('class') != 'row_-1' && firsttr.attr('class') == currenttr.attr('class')){
+            var newText ='';
+            newText += currenttr.find('td:eq(0)').text().split('~')[0];
+            newText += '~'
+            newText += firsttr.find('td:eq(0)').text().split('~')[1];
+            firsttr.find('td:eq(0)').text(newText)
+            currenttr.hide();//remove();
+        }
     }
 </script>
 <%@ include file="/jsp/backend/public/footer.jsp" %>

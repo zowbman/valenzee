@@ -17,7 +17,7 @@
 
 # source function library
 . /etc/init.d/functions
-BASEDIR=/usr/local/livehouse.bigo.ac.cn/
+BASEDIR=/usr/local/livehouse.boboface.com/
 JAVA=/usr/local/java/bin/java
 MAIN_CLASS=cn.ac.bigo.MainServer
 APP=livehouse

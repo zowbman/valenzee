@@ -102,7 +102,12 @@ public class ScheduleController extends BaseController {
             applyListByDatePoShow.setBigoID(applyListByDatePo.getBigoID());
             applyListByDatePoShow.setAddTime(ConcurrentDateUtil.format(applyListByDatePo.getAddTime() * 1000L));//申请添加时间
             String startTime = startTimeCache.getStartTime(applyListByDatePo.getStartTime());//开始时间
-            String endTime = startTimeCache.getStartTime(applyListByDatePo.getStartTime() + applyListByDatePo.getDuration());//结束时间
+            String endTime;//结束时间
+            if (applyListByDatePo.getStartTime() == 48) {
+                endTime = startTimeCache.getStartTime(getEndTime(applyListByDatePo.getStartTime() + applyListByDatePo.getDuration()) + 1);
+            }else{
+                endTime = startTimeCache.getStartTime(applyListByDatePo.getStartTime() + applyListByDatePo.getDuration());
+            }
             StringBuilder sb = new StringBuilder();
             sb.append(applyListByDatePo.getApplyDate());
             sb.append("(");
@@ -113,13 +118,7 @@ public class ScheduleController extends BaseController {
             applyListByDatePoShow.setApplyDate(sb.toString());//申请时间
             applyListByDatePoShow.setDuration(applyListByDatePo.getDuration() / 2f);//时长
             //备注信息处理，如timeSlot时间段的endTime已经排班则提示
-            int endTimeId = applyListByDatePo.getDuration() == 1 ? startTimeId : startTimeId + 1;
-            String timeSlot;
-            if (endTimeId > 48) {
-                timeSlot = String.valueOf(1);
-            } else {
-                timeSlot = String.valueOf(endTimeId);
-            }
+            String timeSlot = getEndTimeStr(applyListByDatePo.getDuration() == 1 ? startTimeId : startTimeId + 1);
             scheduledTimeSlot.stream().filter((s) -> s.indexOf(timeSlot) != -1 || s.indexOf(String.valueOf(startTimeId)) != -1).forEach((s) -> {
                 applyListByDatePoShow.setRemarks("申请时间段已被排班");
                 applyListByDatePoShow.setScheduled(true);
@@ -153,7 +152,12 @@ public class ScheduleController extends BaseController {
             applyListByDatePoShow.setBigoID(applyListByDatePo.getBigoID());
             applyListByDatePoShow.setAddTime(ConcurrentDateUtil.format(applyListByDatePo.getAddTime() * 1000L));//申请添加时间
             String startTime = startTimeCache.getStartTime(applyListByDatePo.getStartTime());//开始时间
-            String endTime = startTimeCache.getStartTime(applyListByDatePo.getStartTime() + applyListByDatePo.getDuration());//结束时间
+            String endTime;//结束时间
+            if (applyListByDatePo.getStartTime() == 48) {
+                endTime = startTimeCache.getStartTime(getEndTime(applyListByDatePo.getStartTime() + applyListByDatePo.getDuration()) + 1);
+            }else{
+                endTime = startTimeCache.getStartTime(applyListByDatePo.getStartTime() + applyListByDatePo.getDuration());
+            }
             StringBuilder sb = new StringBuilder();
             sb.append(applyListByDatePo.getApplyDate());
             sb.append("(");
@@ -165,13 +169,7 @@ public class ScheduleController extends BaseController {
             applyListByDatePoShow.setDuration(applyListByDatePo.getDuration() / 2f);//时长
             applyListByDatePoShow.setOldScheduleId(scheduleId);//旧排班id
             //备注信息处理，如timeSlot时间段的endTime已经排班则提示
-            int endTimeId = applyListByDatePo.getDuration() == 1 ? startTimeId : startTimeId + 1;
-            String timeSlot;
-            if (endTimeId > 48) {
-                timeSlot = String.valueOf(1);
-            } else {
-                timeSlot = String.valueOf(endTimeId);
-            }
+            String timeSlot = getEndTimeStr(applyListByDatePo.getDuration() == 1 ? startTimeId : startTimeId + 1);
             scheduledTimeSlot.stream().filter((s) -> s.indexOf(timeSlot) != -1 || s.indexOf(String.valueOf(startTimeId)) != -1).forEach((s) -> {
                 applyListByDatePoShow.setRemarks("申请时间段已被排班");
                 applyListByDatePoShow.setScheduled(true);
@@ -203,7 +201,7 @@ public class ScheduleController extends BaseController {
             List<String> scheduledTimeSlot = iScheduleService.getTimeSlotListByDate(ConcurrentDateUtil.parse(applyPo.getApplyDate()));
             boolean isPedding = true;
             String startTime = String.valueOf(applyPo.getStartTime());
-            String endTime = String.valueOf(applyPo.getDuration() == 1 ? applyPo.getStartTime() : applyPo.getStartTime() + 1);
+            String endTime = getEndTimeStr(applyPo.getDuration() == 1 ? applyPo.getStartTime() : applyPo.getStartTime() + 1);
             log.info("passApplyForAdd startTime;[{}],endTime;[{}]", startTime, endTime);
             if (scheduledTimeSlot != null && !scheduledTimeSlot.isEmpty()) {
                 for (String s : scheduledTimeSlot) {
@@ -221,10 +219,10 @@ public class ScheduleController extends BaseController {
             saveSchedulePo.setBigoID(applyPo.getBigoID());
             saveSchedulePo.setWhatsAppNumber(applyPo.getWhatsAppNumber());//电话号码
             StringBuilder sb = new StringBuilder();
-            sb.append(applyPo.getStartTime());
+            sb.append(startTime);
             if (applyPo.getDuration() == 2) {
                 sb.append(",");
-                sb.append(applyPo.getStartTime() + 1);
+                sb.append(endTime);
             }
             saveSchedulePo.setTimeSlot(sb.toString());//时间段
             saveSchedulePo.setDate(applyPo.getApplyDate());//申请日期
@@ -269,7 +267,7 @@ public class ScheduleController extends BaseController {
             List<String> scheduledTimeSlot = iScheduleService.getTimeSlotListByDate(ConcurrentDateUtil.parse(applyPo.getApplyDate()));
             boolean isPedding = true;
             String startTime = String.valueOf(applyPo.getStartTime());
-            String endTime = String.valueOf(applyPo.getDuration() == 1 ? applyPo.getStartTime() : applyPo.getStartTime() + 1);
+            String endTime = getEndTimeStr(applyPo.getDuration() == 1 ? applyPo.getStartTime() : applyPo.getStartTime() + 1);
             log.info("passApplyForEdit startTime;[{}],endTime;[{}]", startTime, endTime);
             if (scheduledTimeSlot != null && !scheduledTimeSlot.isEmpty()) {
                 for (String s : scheduledTimeSlot) {
@@ -287,10 +285,10 @@ public class ScheduleController extends BaseController {
             saveSchedulePo.setBigoID(applyPo.getBigoID());
             saveSchedulePo.setWhatsAppNumber(applyPo.getWhatsAppNumber());//电话号码
             StringBuilder sb = new StringBuilder();
-            sb.append(applyPo.getStartTime());
+            sb.append(startTime);
             if (applyPo.getDuration() == 2) {
                 sb.append(",");
-                sb.append(applyPo.getStartTime() + 1);
+                sb.append(endTime);
             }
             saveSchedulePo.setTimeSlot(sb.toString());//时间段
             saveSchedulePo.setDate(applyPo.getApplyDate());//申请日期
@@ -372,5 +370,31 @@ public class ScheduleController extends BaseController {
             }
         }
         return new PubReturnMsg(CodeHelper.FAILURE);
+    }
+
+    /**
+     * 获取endTimeStr
+     * if endTimeId>49 return 1
+     *
+     * @param endTimeId
+     * @return
+     */
+    public String getEndTimeStr(int endTimeId) {
+        return String.valueOf(getEndTime(endTimeId));
+    }
+
+    /**
+     * 获取endTimeId
+     * if endTimeId>49 return 1
+     *
+     * @param endTimeId
+     * @return
+     */
+    public int getEndTime(int endTimeId) {
+        if (endTimeId > 48) {
+            return 1;
+        } else {
+            return endTimeId;
+        }
     }
 }
